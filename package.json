@@ -1,0 +1,14 @@
+{
+	"name":         "track-anything-api",
+	"description":  "A REST API to track any event.",
+	"version":      "0.1.0",
+	"main":         "index.js",
+	"files":        ["index.js", "start-redis.js", "stop-redis.js"],
+	"author":       "Jannis R <mail@jannisr.de>",
+	"homepage":     "https://github.com/derhuerst/track-anything-api",
+	"repository":   "derhuerst/track-anything-api",
+	"bugs":         "https://github.com/derhuerst/track-anything-api/issues",
+	"license":      "ISC",
+	"keywords":     ["track", "events", "http", "analytics", "web", "service"],
+	"engines" :     {"node": ">=6"}
+}
