@@ -10,5 +10,14 @@
 	"bugs":         "https://github.com/derhuerst/track-anything-api/issues",
 	"license":      "ISC",
 	"keywords":     ["track", "events", "http", "analytics", "web", "service"],
-	"engines" :     {"node": ">=6"}
+	"engines" :     {"node": ">=6"},
+	"dependencies": {
+		"config":   "^1.20.1"
+	},
+	"scripts": {
+		"start-redis": "./start-redis.js",
+		"stop-redis":  "./stop-redis.js",
+		"start":       "npm run start-redis",
+		"stop":        "npm run stop-redis"
+	}
 }
