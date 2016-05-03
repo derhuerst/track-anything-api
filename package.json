@@ -12,7 +12,11 @@
 	"keywords":     ["track", "events", "http", "analytics", "web", "service"],
 	"engines" :     {"node": ">=6"},
 	"dependencies": {
-		"config":   "^1.20.1"
+		"config":         "^1.20.1",
+		"redis":          "^2.6.0-2",
+		"redis-commands": "^1.2",
+		"then-redis":     "^2.0.1",
+		"co":             "^4.6"
 	},
 	"scripts": {
 		"start-redis": "./start-redis.js",
