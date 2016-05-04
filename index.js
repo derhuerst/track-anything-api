@@ -10,9 +10,10 @@ const data    = require('./lib/data')
 
 
 
-const noEmail = {status: 'error', msg: 'Missing email.'}
-const noToken = {status: 'error', msg: 'Missing token.'}
-const noKey   = {status: 'error', msg: 'Missing key.'}
+const noEmail   = {status: 'error', msg: 'Missing email.'}
+const noToken   = {status: 'error', msg: 'Missing token.'}
+const noTracker = {status: 'error', msg: 'Missing tracker id.'}
+const noKey     = {status: 'error', msg: 'Missing key.'}
 
 const onError = (req, res, err, status = 500) => {
 	console.error(err.message)
@@ -38,13 +39,6 @@ app.post('/tokens', (req, res) => {
 	.then((data) => onSuccess(req, res, data, 202))
 })
 
-app.get('/tokens', (req, res) => res.end(`
-<form action="/tokens" method="post">
-	<input type="email" name="email" placeholder="email"/>
-	<input type="submit" value="request token"/>
-</form>
-`))
-
 // create a new tracker
 app.post('/trackers', (req, res) => {
 	if (!req.body.id) return res.status(400).json(noTracker)
@@ -55,10 +49,10 @@ app.post('/trackers', (req, res) => {
 })
 
 // increment a tracker
-app.post('/trackers/:id', (req, res) => {
+app.patch('/trackers/:id', (req, res) => {
 	if (!req.params.id) return res.status(400).json(noTracker)
 	if (!req.body.key) return res.status(400).json(noKey)
-	data.inc(req.params.id, req.body.key)
+	data.track(req.params.id, req.body.key)
 	.catch((err) => onError(req, res, err))
 	.then((data) => onSuccess(req, res, data))
 })
