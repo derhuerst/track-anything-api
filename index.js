@@ -12,14 +12,16 @@ const data    = require('./lib/data')
 
 const noEmail = {status: 'error', msg: 'Missing email.'}
 const noToken = {status: 'error', msg: 'Missing token.'}
+const noKey   = {status: 'error', msg: 'Missing key.'}
 
 const onError = (req, res, err, status = 500) => {
 	console.error(err.message)
 	res.status(status).json({status: 'error', msg: err.message})
 }
-const onSuccess = (req, res, msg, status = 200) => {
-	console.info(msg)
-	res.status(status).json({status: 'ok', msg: msg})
+const onSuccess = (req, res, data, status = 200) => {
+	data = Object.assign({status: 'ok', msg: 'Done.'}, data)
+	console.info(data.msg)
+	res.status(status).json(data)
 }
 
 const app = express()
@@ -33,7 +35,7 @@ app.post('/tokens', (req, res) => {
 	const id = shortid.generate()
 	auth.generate(id, req.body.email)
 	.catch((err) => onError(req, res, err))
-	.then((msg) => onSuccess(req, res, msg, 202))
+	.then((data) => onSuccess(req, res, data, 202))
 })
 
 app.get('/tokens', (req, res) => res.end(`
@@ -49,7 +51,7 @@ app.post('/trackers', (req, res) => {
 	if (!req.body.token) return res.status(400).json(noToken)
 	auth.activate(req.body.id, req.body.token)
 	.catch((err) => onError(req, res, err))
-	.then((msg) => onSuccess(req, res, msg, 201))
+	.then((data) => onSuccess(req, res, data, 201))
 })
 
 // increment a tracker
