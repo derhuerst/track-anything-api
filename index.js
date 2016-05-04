@@ -52,13 +52,22 @@ app.post('/trackers', (req, res) => {
 	.then((msg) => onSuccess(req, res, msg, 201))
 })
 
-app.get('/trackers', (req, res) => res.end(`
-<form action="/trackers" method="post">
-	<input type="text" name="id" placeholder="tracker"/>
-	<input type="text" name="token" placeholder="token"/>
-	<input type="submit" value="create tracker"/>
-</form>
-`))
+// increment a tracker
+app.post('/trackers/:id', (req, res) => {
+	if (!req.params.id) return res.status(400).json(noTracker)
+	if (!req.body.key) return res.status(400).json(noKey)
+	data.inc(req.params.id, req.body.key)
+	.catch((err) => onError(req, res, err))
+	.then((data) => onSuccess(req, res, data))
+})
+
+// read a tracker
+app.get('/trackers/:id', (req, res) => {
+	if (!req.params.id) return res.status(400).json(noTracker)
+	data.get(req.params.id)
+	.catch((err) => onError(req, res, err))
+	.then((data) => onSuccess(req, res, data))
+})
 
 
 
