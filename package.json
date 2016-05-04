@@ -16,7 +16,10 @@
 		"redis":          "^2.6.0-2",
 		"redis-commands": "^1.2",
 		"then-redis":     "^2.0.1",
-		"co":             "^4.6"
+		"co":             "^4.6",
+		"mailgun-js":     "^0.7.10",
+		"shortid":        "^2.2.6",
+		"uuid":           "^2.0.2"
 	},
 	"scripts": {
 		"start-redis": "./start-redis.js",

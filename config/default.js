@@ -8,5 +8,9 @@ module.exports = {
 		dir:  path.join(__dirname, '..')
 	},
 	port: 8002,
-	domain: '<domain>'
+	domain: '<domain>',
+	mailgun: {
+		key:    '<mailgun-api-key>',
+		domain: '<mailgun-domain>'
+	}
 }
