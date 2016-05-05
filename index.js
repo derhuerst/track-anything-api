@@ -3,6 +3,7 @@
 const cfg     = require('config')
 const express = require('express')
 const body    = require('body-parser')
+const cors    = require('cors')
 const shortid = require('shortid')
 
 const auth    = require('./lib/auth')
@@ -27,6 +28,7 @@ const onSuccess = (req, res, data, status = 200) => {
 
 const app = express()
 	.use(body.urlencoded({extended: false}))
+	.use(cors())
 
 
 
@@ -49,7 +51,7 @@ app.post('/trackers', (req, res) => {
 })
 
 // increment a tracker
-app.patch('/trackers/:id', (req, res) => {
+app.patch('/trackers/:id', cors(), (req, res) => {
 	if (!req.params.id) return res.status(400).json(noTracker)
 	if (!req.body.key) return res.status(400).json(noKey)
 	data.track(req.params.id, req.body.key)
